@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+
+<jetscape>
+
+  <nEvents> 20000 </nEvents>
+
+  <JetScapeWriterAscii> on </JetScapeWriterAscii>
+
+
+  <Liquefier>
+  <!-- CausalLiquefier -->
+    <CausalLiquefier>
+      <name>CausalLiquefier</name>
+      <dtau>0.02</dtau>
+      <!-- fluid time step in [fm] -->
+      <dx>0.3</dx>
+      <!-- fluid cell size in [fm] -->
+      <dy>0.3</dy>
+      <!-- fluid cell size in [fm] -->
+      <deta>0.2</deta>
+      <!-- fluid cell size -->
+      <tau_delay>2.0</tau_delay>
+      <!-- in [fm] -->
+      <time_relax>0.1</time_relax>
+      <!-- in [fm] -->
+      <d_diff>0.08</d_diff>
+      <!-- in [fm] -->
+      <width_delta>0.1</width_delta>
+      <!-- in [fm] -->
+    </CausalLiquefier>
+  </Liquefier>
+
+
+  <!-- Inital State Module  -->
+  <!--<IS>
+    <Trento> </Trento>
+  </IS>-->
+
+  <!-- Hard Process -->
+  <Hard>
+    <!-- epem Gun -->
+    <!-- Sensible defaults are set in the class. ptHat etc. get their own field -->
+    <PGun>
+      <name>PGun</name>
+      <pT>100</pT>
+      <parID>1</parID>
+    </PGun>
+  </Hard>
+
+  <!--Preequilibrium Dynamics Module -->
+  <!--<Preequilibrium>
+    <NullPreDynamics> </NullPreDynamics>
+  </Preequilibrium>-->
+
+  <!-- Hydro  Module  -->
+  <Hydro>
+    <!-- Test Brick if bjorken_expansion_on="true", T(t) = T * (start_time[fm]/t)^{1/3} -->
+    <Brick bjorken_expansion_on="false" start_time="0.6">
+      <T>0.3</T>
+    </Brick>
+    <AddLiquefier> true </AddLiquefier>
+  </Hydro>
+
+  <!--Eloss Modules -->
+  <Eloss>
+    <AddLiquefier> true </AddLiquefier>
+    <Matter>
+      <Q0> 1.2 </Q0>
+      <in_vac> 0 </in_vac>
+      <brick_med> 1 </brick_med>
+      <brick_length> 8.0 </brick_length>
+      <qhat0> -3.0 </qhat0>
+    </Matter>
+    <Lbt>
+      <Q0> 1.2 </Q0>
+      <in_vac> 0 </in_vac>
+    </Lbt>
+  </Eloss>
+
+  <!-- Jet Hadronization Module -->
+  <JetHadronization>
+       <name>hybrid</name>
+       <take_recoil>1</take_recoil>
+       <eCMforHadronization>0</eCMforHadronization>
+       <reco_Elevelmax>3</reco_Elevelmax>
+       <thermreco_distmax>5.0</thermreco_distmax>
+       <shower_recofactor>1</shower_recofactor>
+       <thermal_recofactor>1</thermal_recofactor>
+       <weak_decays>on</weak_decays>
+   </JetHadronization>
+
+
+
+</jetscape>
